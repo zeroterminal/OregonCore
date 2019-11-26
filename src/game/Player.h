@@ -994,8 +994,6 @@ class Player : public Unit, public GridObject<Player>
 
         void SetInWater(bool apply);
 
-        void InitDisplayIds();
-
         bool IsInWater() const override { return m_isInWater; }
         bool IsUnderWater() const override;
         bool IsFalling() { return GetPositionZ() < m_lastFallZ; }

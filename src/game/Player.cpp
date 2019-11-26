@@ -2425,6 +2425,9 @@ void Player::InitDisplayIds()
         return;
     }
 
+    //Reset scale
+    this->SetObjectScale(1.0f);
+
     uint8 gender = getGender();
     switch (gender)
     {
@@ -18462,35 +18465,6 @@ void Player::InitDataForForm(bool reapplyMods)
     UpdateAttackPowerAndDamage();
     UpdateAttackPowerAndDamage(true);
 }
-
-void Player::InitDisplayIds()
-{
-    PlayerInfo const* info = sObjectMgr.GetPlayerInfo(getRace(), getClass());
-    if (!info)
-    {
-        sLog.outError("Player %u has incorrect race/class pair. Can't init display ids.", GetGUIDLow());
-        return;
-    }
-
-    // reset scale before reapply auras
-    SetObjectScale(1.0f);
-
-    uint8 gender = getGender();
-    switch (gender)
-    {
-    case GENDER_FEMALE:
-        SetDisplayId(info->displayId_f);
-        SetNativeDisplayId(info->displayId_f);
-        break;
-    case GENDER_MALE:
-        SetDisplayId(info->displayId_m);
-        SetNativeDisplayId(info->displayId_m);
-        break;
-    default:
-        sLog.outError("Invalid gender %u for player", gender);
-    }
-}
-
 
 // Return true is the bought item has a max count to force refresh of window by caller
 bool Player::BuyItemFromVendor(uint64 vendorguid, uint32 item, uint8 count, uint8 bag, uint8 slot)
