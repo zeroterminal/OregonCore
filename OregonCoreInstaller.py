@@ -27,8 +27,10 @@ from os import system as cmd
 
 system   = os.name
 username = getpass.getuser()
-dbname  = input("*** database user ? > ")
-dbpass  = input("*** database password ? > ")
+dbname   = input("*** database user ? > ")
+dbpass   = input("*** database password ? > ")
+glink    = "https://doc-0c-9s-docs.googleusercontent.com/docs/securesc/ccs57dv7jsps4bp035itcnh1k3r7h54s/vvg0fa2teel5c7qe9k9q8p3l2c0fg2fj/1575115200000/07951986876393596367/05293450401629768628/10FXuHmt8hgzCqA4df3Xj5wqbVzREs3EU?e=download&authuser=0&nonce=mfpe01hb0e11e&user=05293450401629768628&hash=i2burtbo9d7n5tlcrgrvjgop5671f179"
+dblink   = "https://github.com/talamortis/OregonCore/releases/download/v1.0/database_17_11_19.zip"
 
 
 ## Functions    #########
@@ -47,9 +49,9 @@ def core():
 		corecheck()
 	elif cores == None or cores == "" :
 		print("*** Default Cores Selected ***")
-		os.system("make ~/wow/OregonCore/")
+		os.system("make ~/wow/OregonCore/build")
 	else:
-		os.system("make ~/wow/OregonCore/ -j %s" %cores)
+		os.system("make ~/wow/OregonCore/build -j %s" %cores)
 
 
 ## Preparing    #########
@@ -69,8 +71,7 @@ else:
 	time.sleep(2)
 	if  username != "root":
 	    print ("*** WARNING PROGRAM NEEDS TO BE RUN AS ROOT ***")
-	    print ("*** PROGRAM TERMINATED ***")
-	    exit()
+	    print ("*** PROGRAM TERMINATED ***")	    
 	else:
 	    os.system("clear")
 	    print ("*** ACCESS GRANTED ***")
@@ -214,8 +215,9 @@ else:
 	    os.system("mkdir ~/wow/OregonCore/build")
 	    print ("*** creating build ***")
 	    print ("*** got inside build ***")
-	    print ("*** preparing and cmake ***")
-	    os.system('cmake ~/wow/OregonCore/ -DCMAKE_INSTALL_PREFIX=/home/build -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DSERVERS=1 -DTOOLS=1 -DSCRIPTS=1 -DWITH_DOCS=0 -DWITH_WARNINGS=0 -DWITH_COREDEBUG=0')
+	    print ("*** preparing and cmake ***")	    
+	    os.system('cmake ~/wow/OregonCore/ -DCMAKE_INSTALL_PREFIX=/home/wow/build -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DSERVERS=1 -DTOOLS=1 -DSCRIPTS=1 -DWITH_DOCS=0 -DWITH_WARNINGS=0 -DWITH_COREDEBUG=0')
+	    
 	    print ("*** BUILDING OregonCore ***")
 	    time.sleep(3)
 	    os.system("clear")
@@ -335,5 +337,17 @@ else:
 	    os.system("make install ~/wow/OregonCore/build/")
 	    
 	    print ("*** PART FIVE DATABASE ***")
+	    time.sleep(3)
+
+	    print ("*** DOWNLOADING DATABASE ***")
+	    os.system('wget -P ~/wow/OregonCore/sql/base %s' %dblink)
+
+	    print ("*** EXTRACTING FILES ***")
+	    os.system("unzip database_17_11_19.zip sql/base")
+	    # os.system("rm database_17_11_19.zip")
+
+	    
+
+	    print ("*** Installing OregonCore Database ***")
 
 
