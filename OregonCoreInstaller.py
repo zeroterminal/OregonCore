@@ -69,7 +69,8 @@ else:
 	time.sleep(2)
 	if  username != "root":
 	    print ("*** WARNING PROGRAM NEEDS TO BE RUN AS ROOT ***")
-	    print ("*** PROGRAM TERMINATED ***")	    
+	    print ("*** PROGRAM TERMINATED ***")
+	    exit()
 	else:
 	    os.system("clear")
 	    print ("*** ACCESS GRANTED ***")
