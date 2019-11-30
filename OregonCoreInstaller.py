@@ -7,7 +7,6 @@ import time
 import os
 import random
 import getpass
-from os import system as cmd
 
 ########################################
 ## OregonCore Easy Linux Installer
@@ -34,18 +33,21 @@ username = getpass.getuser()
 #########################
 
 def corecheck(cores = 1):
-	cores = int(input("cores to use?"))
+	print("")
+	print("")
+	cores = int(input("*** cores to use? > "))
 	return cores
 
 def core():
-	if not cores.isdigit():
+	cores = corecheck()
+	if type(cores) == str:
 		print("*** WARNING VALUE WAS NOT A NUMBER")
 		corecheck()
 	elif cores == None or cores == "" :
-		corecheck("*** INVALID VALUE SELECTED ***")
-		cores()
+		print("*** Default Cores Selected ***")
+		os.system("make ~/wow/OregonCore/")
 	else:
-		os.system("make -j %s" %cores)
+		os.system("make ~/wow/OregonCore/ -j %s" %cores)
 
 
 ## Preparing    #########
@@ -62,22 +64,23 @@ else:
 	print("*** And will only run as root ***")
 	print("*** Checking if script has privileges ***")
 
-	time.sleep(7)
+	time.sleep(2)
 	if  username != "root":
 	    print ("*** WARNING PROGRAM NEEDS TO BE RUN AS ROOT ***")
 	    print ("*** PROGRAM TERMINATED ***")	    
 	else:
-
-	  	### REAPEATED SECTION AND TIME WAIT BETWEEN ACTIONS ####
 	    os.system("clear")
 	    print ("*** ACCESS GRANTED ***")
 	    print ("*** INSTALLING DEPENDENCIES ***")
-	    time.sleep(5)	   
-	  	### REAPEATED SECTION AND TIME WAIT BETWEEN ACTIONS ####
+	    time.sleep(5)
 
 	    os.system("sudo apt-get update && apt-get upgrade && sudo apt-get install git cmake make gcc g++ clang libmysqlclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev mysql-server libace-6.* libace-dev  build-essential cmake git binutils-dev libiberty-dev libbz2-dev openssl libssl-dev zlib1g-dev libtool mysql-client unrar libace-dev unzip libncurses-dev -y")
 
 
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
 
     	## PART ONE
     	#######################
@@ -90,6 +93,12 @@ else:
 
 
 
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
 
 
 
@@ -101,10 +110,11 @@ else:
 
 	    print ("*** CREATING FOLDER wow IN HOME DIRECTORY ***")
 	    os.system("mkdir ~/wow")
+	    os.system("mkdir ~/wow/OregonCore")
 	    
 	    print ("*** CLONING OREGONCORE GIT ***")
 	    time.sleep(5)
-	    os.system("cd ~/wow | git clone https://github.com/talamortis/OregonCore.git")
+	    os.system("git clone https://github.com/talamortis/OregonCore.git ~/wow/OregonCore")
 	    time.sleep(5)
 	    print ("*** GITTING COMPLETE ***")
 	    print ("*** DID YOU GIT IT? ok its a joke ***")
@@ -113,31 +123,43 @@ else:
 
 
 
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
 
 
-	    	## PART THREE
+    	## PART THREE
     	#######################
 	    print ("*** PART THREE ***")
     	
-	    os.system("cd OregonCore")
 	    print ("*** got inside OregonCore ***")
-	    os.system("mkdir build")
+	    os.system("mkdir ~/wow/OregonCore/build")
 	    print ("*** creating build ***")
-	    os.system("cd build")
 	    print ("*** got inside build ***")
 	    print ("*** preparing and cmake ***")
-	    os.system('cmake ../ -DCMAKE_INSTALL_PREFIX=/home/build -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DSERVERS=1 -DTOOLS=1 -DSCRIPTS=1 -DWITH_DOCS=0 -DWITH_WARNINGS=0 -DWITH_COREDEBUG=0')
+	    os.system('cmake ~/wow/OregonCore/ -DCMAKE_INSTALL_PREFIX=/home/build -DCMAKE_C_COMPILER="gcc" -DCMAKE_CXX_COMPILER="g++" -DSERVERS=1 -DTOOLS=1 -DSCRIPTS=1 -DWITH_DOCS=0 -DWITH_WARNINGS=0 -DWITH_COREDEBUG=0')
 	    print ("*** BUILDING OregonCore ***")
-	    print ("*** need your attention next ***")
 	    time.sleep(3)
 	    os.system("clear")
+	    print ("*** need your attention in the next section ***")
+	    time.sleep(3)
+
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
 
 
 
 
 
 
-	    ## PART FOUR
+	## PART FOUR
     	#######################
 
 	    print ("*** PART FOUR ***")
@@ -150,9 +172,19 @@ else:
 	    core()
 
 	    
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+	    ###################################################################################################################
+
+
+
 		## PART FIVE
-    	#######################
-	    os.system("make install")
-	    print ("*** PART FIVE ***")
+	    ###################################################################################################################
+
+
+	    os.system("make install ~/wow/OregonCore/build/")
+	    print ("*** PART FIVE  DATABASE ***")
 
 
